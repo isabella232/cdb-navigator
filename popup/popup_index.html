@@ -1,0 +1,65 @@
+
+
+<div id="index">
+    <h1>Index</h1>
+    <table>
+        <tr class="subheader">
+            <td>CONFIG</td>
+        </tr>
+        <tr class="">
+            <td>
+                <table class="noborder">
+                    <tr>
+                        <td>Version</td>
+                        <td>
+                            {{VERSION}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Timeout</td>
+                        <td>
+                            {{#if TIMEOUT}}
+                                {{TIMEOUT}}ms
+                            {{else}}
+                                Unknown
+                            {{/if}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Site ID</td>
+                        <td>{{SITE_ID}}</td>
+                    </tr>
+                    <tr>
+                        <td>Price Granularity</td>
+                        <td><code>{{PRICE_GRANULARITY}}</code></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="subheader">
+            <td>SLOTS</td>
+        </tr>
+        <tr class="">
+            <td>
+                <table class="noborder">
+                    {{#each INDEX_SLOTS}}
+                        <tr class="index-slot">
+                            <td class="element">
+                                {{SLOT_ID}}
+                            </td>
+                            <td class="element">
+                                {{ELEMENT_ID}}
+                            </td>
+                            <td class="size">{{SIZE}}</td>
+                            <td class="bidders">
+                                {{#each BIDDERS}}
+                                <div class="{{#if IS_CRITEO}}criteo-text{{/if}}">{{BIDDER}}</div>
+                                {{/each}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

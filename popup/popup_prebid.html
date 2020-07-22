@@ -1,0 +1,85 @@
+<style>
+    #prebid .timeline { position: relative; }
+    #prebid .timeline .bidder { padding: 3px 0; position: relative; height: 1.8em; }
+    #prebid .timeline .bidder .name { position: absolute; left: 0; top: 0; }
+    #prebid .timeline .bidder .request { margin-left: 100px; }
+    #prebid .timeline .bidder .line { height: 1.2em; color:#fff; border-radius: 4px; font-size: 0.7em; text-indent: 5px; background-color: #65686b; }
+    #prebid .timeline .bidder-criteo .line { background-color: #f18000; }
+    #prebid .timeline .timeout-line { position: absolute; top: 0px; width:1px; height: 100%; border-left:1px dashed #555; }
+</style>
+<div id="prebid">
+    <h1>Prebid</h1>
+    <table>
+        <tr class="subheader">
+            <td>CONFIG</td>
+        </tr>
+        <tr class="">
+            <td>
+                <table class="noborder">
+                    <tr>
+                        <td width="180">Prebid Version</td>
+                        <td>
+                            {{PREBID_VERSION}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="180">Criteo Adapter Version</td>
+                        <td>
+                            {{CRITEO_ADAPTER_VERSION}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Timeout</td>
+                        <td>
+                            {{#if TIMEOUT}}
+                                {{TIMEOUT}}ms
+                            {{else}}
+                                Unknown
+                            {{/if}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Send All Bids</td>
+                        <td>{{SEND_ALL_BIDS}}</td>
+                    </tr>
+                    <tr>
+                        <td>Price Granularity</td>
+                        <td><code>{{PRICE_GRANULARITY}}</code></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="subheader">
+            <td>SLOTS</td>
+        </tr>
+        <tr class="">
+            <td>
+                <table class="noborder">
+                    {{#each PREBID_SLOTS}}
+                        <tr class="prebid-slot">
+                            <td class="element">
+                                {{SLOT_ELEMENT_ID}}
+                                {{#unless HAS_CRITEO}}
+                                <div class="warning">Not monetised by Criteo!</div>
+                                {{/unless}}
+                            </td>
+                            <td class="size">{{SLOT_SIZE}}</td>
+                            <td class="bidders">
+                                {{#if SLOT_BIDDERS}}
+                                {{#each SLOT_BIDDERS}}
+                                <div class="{{#if IS_CRITEO}}criteo-text{{/if}}">{{BIDDER}}: {{BIDS}}</div>
+                                {{/each}}
+                                {{/if}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+            </td>
+        </tr>
+        {{#if MISSING_ADUNITS}}
+        <tr class="footer">
+            <td class="warning">WARNING: There are adunits not monetised by Criteo!</td>
+        </tr>
+        {{/if}}
+    </table>
+</div>

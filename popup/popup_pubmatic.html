@@ -1,0 +1,40 @@
+
+<div id="pubmatic">
+    <h1>Pubmatic</h1>
+    <table>
+        <tr class="subheader">
+            <td>SLOTS</td>
+        </tr>
+        <tr class="">
+            <td>
+                <table class="noborder">
+                    {{#each PUBMATIC_SLOTS}}
+                        <tr class="prebid-slot">
+                            <td class="element">
+                                {{SLOT_ID}}
+                                {{#unless HAS_CRITEO}}
+                                <div class="warning">Not monetised by Criteo!</div>
+                                {{/unless}}
+                            </td>
+                            <td class="size">{{SLOT_SIZE}}</td>
+                            <td class="bidders">
+                                {{#each SLOT_BIDDERS}}
+                                <div class="{{#if IS_CRITEO}}criteo-text{{/if}}">
+                                	{{BIDDER}}: {{BIDS}}
+                                	{{#if IS_WINNING}}<i class="glyphicon glyphicon-king" style="margin-left:10px;color:#a70000" data-toggle="tooltip" data-placement="bottom" title="Winning Bid"></i>{{/if}}
+                                    {{#if IS_POSTTIMEOUT}}<i class="glyphicon glyphicon-hourglass" style="margin-left:10px;color:#aaaaaa;font-size:0.9em;" data-toggle="tooltip" data-placement="bottom" title="Bid arrives after timeout"></i>{{/if}}
+                                </div>
+                                {{/each}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+            </td>
+        </tr>
+        {{#if MISSING_ADUNITS}}
+        <tr class="footer">
+            <td class="warning">WARNING: There are adunits not monetised by Criteo!</td>
+        </tr>
+        {{/if}}
+    </table>
+</div>

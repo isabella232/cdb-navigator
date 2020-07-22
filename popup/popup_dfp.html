@@ -1,0 +1,75 @@
+
+
+<div id="dfp">
+    <h1>
+        DFP
+        <button class="btn btn-sm btn-success" style="float:right" id="dfp_open_console_btn">Open Console</button>
+    </h1>
+    <table>
+        <tr class="subheader">
+            <td>CONFIG</td>
+        </tr>
+        <tr class="">
+            <td>
+                <table class="noborder">
+                    <tr>
+                        <td>Request Mode</td>
+                        <td>
+                            {{#if SRA}}
+                                Single Request Architecture (SRA)
+                            {{else}}
+                                Standard (Multi-Requests)
+                            {{/if}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Rendering Mode</td>
+                        <td>
+                            {{#if ASYNC}}
+                                Asynchronous
+                            {{else}}
+                                <b style="color:#a70000">Synchronous</b>
+                            {{/if}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="subheader">
+            <td>SLOTS</td>
+        </tr>
+        <tr class="">
+            <td>
+                <table class="noborder">
+                    {{#each DFP_SLOTS}}
+                        <tr class="dfp-slot">
+                            <td class="element">
+                                <div>{{SLOT_ELEMENT_ID}}</div>
+                                {{#each TARGETINGS}}
+                                    <div class="label label-warning">{{this}}</div>
+                                {{/each}}
+                            </td>
+                            <td class="name" style="display:none">{{SLOT_NAME}}</td>
+                            <td class="size">{{SLOT_SIZE}}</td>
+                            <td class="zoneids">
+                                {{#each ZONE_IDS}}
+                                <span data-toggle="tooltip" data-placement="bottom" title="Loading zone details..." class="zoneid">{{this}}</span>{{#unless @last}},{{/unless}}&nbsp;
+                                {{/each}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+            </td>
+        </tr>
+        {{#if FETCH_BEFORE_KEYVALUE}}
+        <tr class="footer">
+            <td class="warning">WARNING: Keyvalues are set later after adslot is fetched</td>
+        </tr>
+        {{/if}}
+        {{#if FETCH_BEFORE_REFRESH}}
+        <tr class="footer">
+            <td class="warning">WARNING: Adslot fetch detected before ad refresh</td>
+        </tr>
+        {{/if}}
+    </table>
+</div>

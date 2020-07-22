@@ -1,0 +1,52 @@
+{
+    "manifest_version": 2,
+
+    "name": "CDB Navigator",
+    "description": "Helps site owners implement and analyze Criteo Direct Bidder implementation",
+    "version": "1.5",
+
+    "browser_action": {
+        "default_popup" : "popup/popup.html",
+        "default_title" : "CDB Navigator",
+        "default_icon": "images/icon_16_off.png"
+    },
+
+    "icons": {
+        "16": "images/icon_16.png",
+        "32": "images/icon_32.png",
+       "128": "images/icon_128.png"
+    },
+
+    "background" : {
+        "scripts" : [
+            "/vendor/jquery-2.2.3.min.js",
+            "/vendor/sha256.min.js",
+            "/vendor/async.min.js",
+            "/vendor/require.js",
+            "/background/background.js",
+            "/background/background_contentscript.js",
+            "/background/background_gettabinfo.js",
+            "/background/background_cdb.js",
+            "/background/background_auth.js"
+        ]
+    },
+
+    "web_accessible_resources": [
+        "/images/*",
+        "/contentscripts/*",
+        "/vendor/*"
+    ],
+
+    "permissions": [
+        "webRequest",
+        "webNavigation",
+        "activeTab",
+        "storage",
+        "tabs",
+        "<all_urls>"
+    ],
+
+    "content_security_policy": "script-src 'self' https://www.google-analytics.com 'unsafe-eval'; object-src 'self'",
+
+    "incognito" : "split"
+}

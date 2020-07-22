@@ -1,0 +1,42 @@
+
+
+<div id="adfox">
+    <h1>AdFox</h1>
+    <table>
+        <tr class="subheader">
+            <td>SLOTS</td>
+        </tr>
+        <tr class="">
+            <td>
+                <table class="noborder">
+                    {{#each ADFOX_SLOTS}}
+                        <tr class="adfox-slot">
+                            <td class="element">
+                                {{SLOT_ID}}
+                            </td>
+                            <!--
+                            <td>
+                                {{#unless ELEMENT_EXISTS}}
+                                <i class="glyphicon glyphicon-eye-close" style="margin-left:10px;color:#a70000" data-toggle="tooltip" data-placement="bottom" title="Slot not exists on page"></i>
+                                {{/unless}}
+                            </td>
+                            -->
+                            <td class="bidders">
+                                {{#each BIDS}}
+                                <div class="">
+                                    {{BIDDER}}:
+                                    {{#if HAS_BID}}
+                                        {{CPM}}
+                                    {{else}}
+                                        No Bid
+                                    {{/if}}
+                                </div>
+                                {{/each}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

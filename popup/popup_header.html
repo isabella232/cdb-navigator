@@ -1,0 +1,25 @@
+<style>
+    #container { height: 600px !important; }
+
+    #general { margin: 20px 0; }
+    #general .url { font-size: 1.2em; word-break: break-all; }
+    #general .loading { color: #ef2121; margin-top: 20px; }
+</style>
+
+<div id="general">
+    <div class="url"><b>Page URL:</b> {{URL}}</div>
+    <!--
+    {{#if CDB_PROFILES}}
+    {{#each CDB_PROFILES}}
+    	<div class="label label-primary">{{this}}</div>
+    {{/each}}
+    {{/if}}
+    -->
+
+    {{#if IS_STAGING}}
+    <div class="alert alert-info" style="margin: 5px 0;">
+        <strong>WARNING:</strong> This is a staging version of CDB Navigator.<br>
+        Use the official one to send to publishers: <a href="https://chrome.google.com/webstore/detail/gs%20-for-publishers/oheldeknbhmgffgjgiefcgoeaaafhcmd" target="_blank">https://chrome.google.com/webstore/detail/gs%20-for-publishers/oheldeknbhmgffgjgiefcgoeaaafhcmd</a>
+    </div>
+    {{/if}}
+</div>

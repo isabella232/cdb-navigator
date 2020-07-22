@@ -1,0 +1,126 @@
+
+<style>
+    #cdb .cdb-label { white-space: nowrap; }
+    #cdb .cdb-debug-name { white-space: nowrap; }
+    #cdb .cdb-debug-value { word-break: break-all; }
+</style>
+
+<div id="cdb">
+    <h1>
+        Criteo Direct Bidder
+    </h1>
+    <table>
+        <tr class="subheader">
+            <td>CONFIG</td>
+        </tr>
+        <tr class="">
+            <td>
+                <table class="noborder">
+                    <tr>
+                        <td width="180">PublisherTag Version</td>
+                        <td>
+                            {{PUBTAG_VERSION}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="180">Price Granularity</td>
+                        <td>
+                            {{#if IS_STANDALONE}}
+                                <code>{{PRICE_GRANULARITY}}</code>
+                            {{else if IS_PREBID}}
+                                <i>See Prebid section</i>
+                            {{else if IS_INDEX}}
+                                <i>See Index section</i>
+                            {{else}}
+                                <code>{{PRICE_GRANULARITY}}</code>
+                            {{/if}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="subheader">
+            <td>CALLS</td>
+        </tr>
+        <tr>
+            <td>
+                <table class="noborder">
+                {{#each CDB_CALLS}}
+                    <tr class="cdb-call even">
+                        <td class="url">{{URL}}</td>
+                        <!--<td class="time">{{STATUS}}</td>-->
+                        <td class="time">{{TIME_MS}}</td>
+                    </tr>
+                    <tr class="subheader">
+                        <td colspan="3">PUBLISHER</td>
+                    </tr>
+                    <tr class="">
+                        <td colspan="3">
+                            <table class="noborder">
+                                <tr class="cdb-publisher-url">
+                                    <td class="cdb-label">URL</td>
+                                    <td class="url">{{PUBLISHER.url}}</td>
+                                </tr>
+                                {{#if PUBLISHER.networkid}}
+                                <tr class="cdb-publisher-networkid">
+                                    <td class="cdb-label">Network ID</td>
+                                    <td class="networkid">{{PUBLISHER.networkid}}</td>
+                                </tr>
+                                {{/if}}
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="subheader">
+                        <td colspan="3">
+                            SLOTS
+                            {{#if DYNAMIC_SLOT}}
+                            <div class="label label-info">Dynamic Slots</div>
+                            {{/if}}
+                        </td>
+                    </tr>
+                    <tr class="">
+                        <td colspan="3">
+                            <table class="noborder">
+                                {{#each SLOTS}}
+                                    <tr class="cdb-call">
+                                        <td class="impid">{{IMPID}}</td>
+                                        {{#if ZONEID}}
+                                        <td class="zoneid"><span data-toggle="tooltip" data-placement="bottom" title="Loading zone details..." class="zoneid">{{ZONEID}}</span></td>
+                                        {{else if SIZES}}
+                                        <td class="size">{{SIZES}}</td>
+                                        {{else}}
+                                        <td class="">NO ZONE ID or SIZE</td>
+                                        {{/if}}
+                                    </tr>
+                                {{/each}}
+                            </table>
+                        </td>
+                    </tr>
+                    {{#if CDB_DEBUG}}
+                    <tr class="subheader">
+                        <td colspan="3">DEBUG HEADERS</td>
+                    </tr>
+                    <tr class="">
+                        <td colspan="3">
+                            <table class="noborder">
+                                {{#each CDB_DEBUG}}
+                                    <tr class="cdb-debug">
+                                        <td class="cdb-debug-name">{{DEBUG_NAME}}</td>
+                                        <td class="cdb-debug-value">{{{DEBUG_VALUE}}}</td>
+                                    </tr>
+                                {{/each}}
+                            </table>
+                        </td>
+                    </tr>
+                    {{/if}}
+                    {{#if TOO_MANY_SLOTS}}
+                    <tr class="footer">
+                        <td colspan="3" class="warning">WARNING: It is not recommended to arbitrage more than 8 slots on a single page</td>
+                    </tr>
+                    {{/if}}
+                {{/each}}
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
